@@ -6,7 +6,7 @@
 
 前往release页面下载编译好的jar文件，或clone后执行`gradlew shadowJar`
 
-在控制台内输入`java -jar SafeCourse.jar`
+在控制台内输入`java -jar SafeCourse-1.0.jar`
 
 使用浏览器打开课程页面并登录，`F12`打开开发人员工具，点击`console`或`控制台`并输入以下带代码回车
 

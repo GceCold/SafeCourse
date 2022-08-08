@@ -2,7 +2,7 @@
 
 ## 使用方法
 
-环境要求：**jre17+**
+环境要求：**java 17+**
 
 前往release页面下载编译好的jar文件，或clone后执行`gradlew shadowJar`
 

@@ -1,3 +1,6 @@
+# Test json file
+*.json
+
 # User-specific stuff
 .idea/
 

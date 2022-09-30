@@ -1,4 +1,5 @@
 package ltd.icecold.course.network;
+
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
@@ -10,10 +11,12 @@ import java.util.Random;
 
 /**
  * Send Request To Server
+ *
  * @author icecold
  */
 public class Request {
     public static List<String> chinaIp = new ArrayList<>();
+
     static {
         chinaIp.add("103.245.52");
         chinaIp.add("103.245.60");
@@ -29,38 +32,38 @@ public class Request {
 
     /**
      * 获取随机中国大陆ip
+     *
      * @return ip
      */
-    public static String getRandomChinaIp(){
-        Random random =new Random();
+    public static String getRandomChinaIp() {
+        Random random = new Random();
         return chinaIp.get(random.nextInt(10)) + "." + (random.nextInt(254) + 1);
     }
 
     /**
      * 根据UserAgent类型获取UserAgent
+     *
      * @param type 类型
      * @return UserAgent
      */
-    public static String getUserAgent(UserAgentType type){
-        Random random =new Random();
-        if (type == UserAgentType.ANDROID){
-            return UserAgent.getUserAgent(random.nextInt(3)+7);
-        } else
-        if (type == UserAgentType.IPHONE){
-            return UserAgent.getUserAgent(random.nextInt(6)+1);
-        }else
-        if (type == UserAgentType.PC){
-            return UserAgent.getUserAgent(random.nextInt(8)+9);
-        }else {
+    public static String getUserAgent(UserAgentType type) {
+        Random random = new Random();
+        if (type == UserAgentType.ANDROID) {
+            return UserAgent.getUserAgent(random.nextInt(3) + 7);
+        } else if (type == UserAgentType.IPHONE) {
+            return UserAgent.getUserAgent(random.nextInt(6) + 1);
+        } else if (type == UserAgentType.PC) {
+            return UserAgent.getUserAgent(random.nextInt(8) + 9);
+        } else {
             throw new NullPointerException("Unknown UserAgent Type");
         }
     }
 
-    public enum UserAgentType{
-        PC,IPHONE,ANDROID
+    public enum UserAgentType {
+        PC, IPHONE, ANDROID
     }
 
-    public static Connection.Response sendPost(String url, Map<String,String> data) throws IOException {
+    public static Connection.Response sendPost(String url, Map<String, String> data) throws IOException {
         return Jsoup
                 .connect(url)
                 .data(data)
@@ -70,7 +73,7 @@ public class Request {
                 .execute();
     }
 
-    public static Connection.Response sendPost(String url, Map<String,String> data,Map<String,String> header,Map<String,String> cookie) throws IOException {
+    public static Connection.Response sendPost(String url, Map<String, String> data, Map<String, String> header, Map<String, String> cookie) throws IOException {
         return Jsoup
                 .connect(url)
                 .headers(header)
@@ -81,12 +84,13 @@ public class Request {
                 .method(Connection.Method.POST)
                 .execute();
     }
-    public static Connection.Response sendGet(String url,Map<String, String> headers,Map<String, String> cookies) throws IOException {
+
+    public static Connection.Response sendGet(String url, Map<String, String> headers, Map<String, String> cookies) throws IOException {
         return Jsoup
                 .connect(url)
                 .headers(headers)
                 .cookies(cookies)
-                .timeout(5*1000)
+                .timeout(5 * 1000)
                 .ignoreContentType(true)
                 .method(Connection.Method.GET)
                 .execute();

@@ -1,5 +1,13 @@
 # SafeCourse
 
+![](https://img.shields.io/github/license/GceCold/SafeCourse?style=for-the-badge)
+![](https://img.shields.io/github/workflow/status/GceCold/SafeCourse/Java%20CI%20with%20Gradle?style=for-the-badge)
+
+## 功能
+
+1. 自动刷课
+2. 缓存、查询考试答案 (需要完成一次考试)
+
 ## 使用方法
 
 环境要求：**java 17+**
@@ -14,5 +22,3 @@
 data = JSON.parse(localStorage.user)
 console.log(data.userId+','+data.tenantCode+','+data.token)
 ```
-
-将输出结果复制到控制台内并回车 等待刷课结束

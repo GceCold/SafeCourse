@@ -1,4 +1,6 @@
-package ltd.icecold;
+package ltd.icecold.course;
+
+import ltd.icecold.course.user.WeiBanUser;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -1,7 +1,10 @@
-package ltd.icecold;
+package ltd.icecold.course.network;
 
+/**
+ * UserAgent
+ * @author icecold
+ */
 public enum UserAgent {
-
     IPHONE_11("Mozilla/5.0 (iPhone; CPU iPhone OS 11_0 like Mac OS X) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Mobile/15A356 Safari/604.1",1),
     IPHONE_10("Mozilla/5.0 (iPhone; CPU iPhone OS 10_0 like Mac OS X) AppleWebKit/602.1.38 (KHTML, like Gecko) Version/10.0 Mobile/14A300 Safari/602.1",2),
     IPHONE_10_2("Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_2 like Mac OS X) AppleWebKit/603.2.4 (KHTML, like Gecko) Mobile/14F89;GameHelper",3),

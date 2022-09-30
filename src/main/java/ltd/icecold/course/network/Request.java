@@ -1,4 +1,4 @@
-package ltd.icecold;
+package ltd.icecold.course.network;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
@@ -9,9 +9,8 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- * Send Request To Music Server
- *
- * @author ice-cold
+ * Send Request To Server
+ * @author icecold
  */
 public class Request {
     public static List<String> chinaIp = new ArrayList<>();

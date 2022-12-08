@@ -14,6 +14,8 @@ import org.jsoup.Connection;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -153,13 +155,14 @@ public class WeiBanUser {
                             String courseUrl = getCourseUrl(projectId, data.get("resourceId").getAsString());
                             if (!courseUrl.equals("")){
                                 doStudy(projectId, data.get("resourceId").getAsString());
-                                Thread.sleep(1000 * 10);
-                                finishCourse(data.get("userCourseId").getAsString());
+                                Thread.sleep(1000 * 5);
+                                finishCourse(data.get("userCourseId").getAsString(),courseUrl);
                                 System.out.println("\t\t等待延迟：25s");
                                 Thread.sleep(1000 * 25);
+                            }else {
+                                System.out.println("\t非标准课程链接，本节课程可能学习失败");
+                                Thread.sleep(1000 * 5);
                             }
-                            System.out.println("\t非标准课程链接，本节课程可能学习失败");
-                            Thread.sleep(1000 * 5);
                         } catch (IOException | InterruptedException e) {
                             throw new RuntimeException(e);
                         }
@@ -222,8 +225,7 @@ public class WeiBanUser {
         Connection.Response courseUrl = Request.sendPost("https://weiban.mycourse.cn/pharos/usercourse/getCourseUrl.do?timestamp=" + timestamp, Map.of("userProjectId", projectId, "courseId", courseId, "userId", userId, "tenantCode", tenantCode), headers, Map.of("SERVERID", cookie));
         cookie = courseUrl.cookies().get("SERVERID");
         timestamp = cookie.split("\\|")[1];
-        String url = JsonParser.parseString(courseUrl.body()).getAsJsonObject().get("data").getAsString();
-        System.out.println(courseUrl.body());
+        String url = URLDecoder.decode(JsonParser.parseString(courseUrl.body()).getAsJsonObject().get("data").getAsString(), StandardCharsets.UTF_8);
         for (String data : url.split("&")) {
             if (data.contains("methodToken")){
                 return data.replace("methodToken=","").trim();
@@ -232,8 +234,8 @@ public class WeiBanUser {
         return "";
     }
 
-    public void finishCourse(String courseId) throws IOException {
-        Connection.Response finish = Request.sendGet("https://weiban.mycourse.cn/pharos/usercourse/v1/"+courseId+".do?callback=jQuery0000&userCourseId=" + courseId + "&tenantCode=" + tenantCode + "&_=1653558911737", headers, Map.of("SERVERID", cookie));
+    public void finishCourse(String courseId,String courseUrl) throws IOException {
+        Connection.Response finish = Request.sendGet("https://weiban.mycourse.cn/pharos/usercourse/v1/"+courseUrl+".do?callback=jQuery0000&userCourseId=" + courseId + "&tenantCode=" + tenantCode + "&_=1653558911737", headers, Map.of("SERVERID", cookie));
         System.out.println("        完成状态：" + finish.statusCode());
     }
 

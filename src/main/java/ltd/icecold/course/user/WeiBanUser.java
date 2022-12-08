@@ -155,7 +155,7 @@ public class WeiBanUser {
                             String courseUrl = getCourseUrl(projectId, data.get("resourceId").getAsString());
                             if (!courseUrl.equals("")){
                                 doStudy(projectId, data.get("resourceId").getAsString());
-                                Thread.sleep(1000 * 5);
+                                Thread.sleep(1000 * 10);
                                 finishCourse(data.get("userCourseId").getAsString(),courseUrl);
                                 System.out.println("\t\t等待延迟：25s");
                                 Thread.sleep(1000 * 25);
@@ -222,7 +222,7 @@ public class WeiBanUser {
     }
 
     public String getCourseUrl(String projectId, String courseId) throws IOException {
-        Connection.Response courseUrl = Request.sendPost("https://weiban.mycourse.cn/pharos/usercourse/getCourseUrl.do?timestamp=" + timestamp, Map.of("userProjectId", projectId, "courseId", courseId, "userId", userId, "tenantCode", tenantCode), headers, Map.of("SERVERID", cookie));
+        Connection.Response courseUrl = Request.sendPost("https://weiban.mycourse.cn/pharos/usercourse/getCourseUrl.do?timestamp=" + timestamp, Map.of("userProjectId", projectId, "courseId", courseId, "userId", userId, "tenantCode", tenantCode), headers, Map.of("SERVERID", cookie,"Path","/"));
         cookie = courseUrl.cookies().get("SERVERID");
         timestamp = cookie.split("\\|")[1];
         String url = URLDecoder.decode(JsonParser.parseString(courseUrl.body()).getAsJsonObject().get("data").getAsString(), StandardCharsets.UTF_8);
